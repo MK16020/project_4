@@ -65,9 +65,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xff304ffe),
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Login',
                         style: TextStyle(color: Colors.white),

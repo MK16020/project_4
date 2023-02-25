@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_project_4/components/form_section.dart';
 import 'package:flutter_project_4/models/ticket_model.dart';
 import 'package:flutter_project_4/models/ticket_status_model.dart';
+import 'package:intl/intl.dart';
 
 class AddTicketPage extends StatefulWidget {
   const AddTicketPage({super.key});
@@ -58,7 +58,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width * 0.5;
+    var width = 300.0;
     var dropdownButton = DropdownButton(
       items: menuItems,
       value: selectedValue,

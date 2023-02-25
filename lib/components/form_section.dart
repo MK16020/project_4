@@ -23,7 +23,8 @@ class FormSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(name),
-        Expanded(
+        SizedBox(
+          width: width,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: const BoxDecoration(

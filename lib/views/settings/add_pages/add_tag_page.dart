@@ -16,7 +16,7 @@ class _AddTagPageState extends State<AddTagPage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width ;
+    var width = 300.0 ;
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [

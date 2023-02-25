@@ -46,7 +46,7 @@ class _AddContactPageState extends State<AddContactPage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width * 0.5;
+    var width = 300.0;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
