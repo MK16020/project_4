@@ -24,8 +24,8 @@ class DashboardSection extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(50)),
               ),
               margin: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Icon(
                     Icons.person_add,
                     color: Color(0xff0000ff),
@@ -33,9 +33,15 @@ class DashboardSection extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [Text('Total'), Text('0')],
+              children: [
+                Text(
+                  'Total',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                Text('0')
+              ],
             ),
           ],
         ),

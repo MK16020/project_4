@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Text('Don\'t you have an account?'),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const RegisterPage(),
                         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_4/views/login/login_page.dart';
 
 import '../../components/form_section.dart';
 
@@ -45,9 +46,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: Color(0xff304ffe),
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Create account',
                         style: TextStyle(color: Colors.white),
@@ -63,7 +64,17 @@ class _RegisterPageState extends State<RegisterPage> {
               const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [Text('Have an account?'), Text('Login')],
+                children: [
+                  const Text('Have an account?'),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginPage()),
+                        );
+                      },
+                      child: const Text('Login'))
+                ],
               ),
             ],
           ),

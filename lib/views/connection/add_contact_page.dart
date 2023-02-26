@@ -14,6 +14,8 @@ class _AddContactPageState extends State<AddContactPage> {
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
+  final salutationController = TextEditingController();
+  final phoneController = TextEditingController();
   bool submit = false;
   @override
   void initState() {
@@ -34,6 +36,8 @@ class _AddContactPageState extends State<AddContactPage> {
   void dispose() {
     nameController.dispose();
     emailController.dispose();
+    phoneController.dispose();
+    salutationController.dispose();
     super.dispose();
   }
 
@@ -71,10 +75,10 @@ class _AddContactPageState extends State<AddContactPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FormSection(width: width, name: 'salutation', lines: 1, inputController: emailController),
+              FormSection(width: width, name: 'salutation', lines: 1, inputController: salutationController),
               FormSection(width: width, name: 'name', lines: 1, inputController: nameController),
               FormSection(width: width, name: 'email', lines: 1, inputController: emailController),
-              FormSection(width: width, name: 'Phone', lines: 1, inputController: emailController),
+              FormSection(width: width, name: 'Phone', lines: 1, inputController: phoneController),
               ElevatedButton(
                 onPressed: submit ? () => submitData : null,
                 style: ElevatedButton.styleFrom(surfaceTintColor: const Color(0xff0000ff)),

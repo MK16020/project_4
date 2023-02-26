@@ -10,13 +10,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          ListTile(
+          const ListTile(
             title: Row(
-              children: const [
+              children: [
                 Text('Dashboard/CRM'),
               ],
             ),
-            trailing: const Icon(Icons.calendar_month),
+            trailing: Icon(Icons.calendar_month),
           ),
           Container(
             padding: const EdgeInsets.all(20),
@@ -27,8 +27,8 @@ class HomePage extends StatelessWidget {
             ),
             child: const Text('Contacts'),
           ),
-          Row(
-            children: const [
+          const Row(
+            children: [
               DashboardSection(),
               DashboardSection(),
             ],
@@ -40,10 +40,10 @@ class HomePage extends StatelessWidget {
                 BorderSide(color: Colors.black12, width: 0.5),
               ),
             ),
-            child: const Text('Contacts'),
+            child: const Text('Tickets'),
           ),
-          Row(
-            children: const [
+          const Row(
+            children: [
               DashboardSection(),
               DashboardSection(),
             ],
