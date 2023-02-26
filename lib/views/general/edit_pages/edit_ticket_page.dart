@@ -1,20 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_4/components/form_section.dart';
-import 'package:flutter_project_4/models/contact_model.dart';
-import 'package:flutter_project_4/models/ticket_model.dart';
-import 'package:flutter_project_4/models/ticket_status_model.dart';
 import 'package:intl/intl.dart';
 
-class AddTicketPage extends StatefulWidget {
-  const AddTicketPage({super.key});
+import '../../../components/form_section.dart';
+import '../../../models/contact_model.dart';
+import '../../../models/ticket_model.dart';
+import '../../../models/ticket_status_model.dart';
+
+class EditTicketPage extends StatefulWidget {
+  const EditTicketPage({super.key, required this.editTicket});
+  final TicketModel editTicket;
 
   @override
-  State<AddTicketPage> createState() => _AddTicketPageState();
+  State<EditTicketPage> createState() => _EditTicketPageState();
 }
 
-class _AddTicketPageState extends State<AddTicketPage> {
+class _EditTicketPageState extends State<EditTicketPage> {
   final List<String> priority = ['Low', 'Medium', 'High', 'Urgent'];
   int selected = 0;
   String selectedValue = TicketStatusModel.statuses.first.name;
@@ -111,11 +113,17 @@ class _AddTicketPageState extends State<AddTicketPage> {
                     onChanged: (selected) {
                       selectedContact = selected!;
                     },
+                    selectedItem: ContactModel.getContactFromID(widget.editTicket.contactID),
                   ),
                 ),
                 const SizedBox(height: 16),
                 FormSection(width: width, name: 'Subject', inputController: subjectController),
-                FormSection(width: width, name: 'Description', inputController: descriptionController),
+                FormSection(
+                  width: width,
+                  name: 'Description',
+                  inputController: descriptionController,
+                  lines: 5,
+                ),
                 const Text('Status'),
                 const SizedBox(height: 16),
                 Container(
@@ -153,40 +161,55 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    var createdAt = DateFormat.yMMMEd().format(DateTime.now());
-                    var ticketID = TicketModel.tickets.length + 1;
-                    TicketModel ticket = TicketModel(
-                      id: ticketID.toString(),
-                      subject: subjectController.text.trim(),
-                      description: descriptionController.text.trim(),
-                      statusID: TicketStatusModel.statuses.first.id,
-                      priority: priority[selected],
-                      createdAt: createdAt,
-                      contactID: selectedContact.id,
-                    );
-                    FirebaseFirestore.instance.collection('Ticket').doc(ticketID.toString()).set(ticket.toMap());
-                    Navigator.pop(context);
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        var createdAt = DateFormat.yMMMEd().format(DateTime.now());
 
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const AlertDialog(
-                          backgroundColor: Colors.green,
-                          title: Text(
-                            'Ticket added successfully',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        TicketModel ticket = TicketModel(
+                          id: widget.editTicket.id,
+                          subject: subjectController.text.trim(),
+                          description: descriptionController.text.trim(),
+                          statusID: TicketStatusModel.statuses.first.id,
+                          priority: priority[selected],
+                          createdAt: createdAt,
+                          contactID: selectedContact.id,
                         );
+                        FirebaseFirestore.instance.collection('Ticket').doc(widget.editTicket.id).set(ticket.toMap());
+                        Navigator.pop(context);
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              backgroundColor: Colors.green,
+                              title: Text(
+                                'Ticket Edited successfully',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            );
+                          },
+                        );
+                        setState(() {});
                       },
-                    );
-                    setState(() {});
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff0000ff), fixedSize: const Size(100, 50)),
-                  child: const Text('Create'),
-                ),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff0000ff), fixedSize: const Size(100, 50)),
+                      child: const Text('Edit'),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        FirebaseFirestore.instance.collection('Ticket').doc(widget.editTicket.id).delete();
+                        TicketModel.tickets.remove(widget.editTicket);
+                        Navigator.pop(context);
+                        
+                      },
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red, fixedSize: const Size(100, 50)),
+                      child: const Text('Delete'),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

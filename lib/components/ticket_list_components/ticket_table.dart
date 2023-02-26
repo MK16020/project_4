@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_4/models/contact_model.dart';
 import 'package:flutter_project_4/models/ticket_model.dart';
 import 'package:flutter_project_4/models/ticket_status_model.dart';
+import 'package:flutter_project_4/views/general/edit_pages/edit_ticket_page.dart';
 
 class TicketTable extends StatelessWidget {
   const TicketTable({
@@ -12,7 +13,6 @@ class TicketTable extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> headerTitles = [
       '#',
-      'ID',
       'Priority',
       'Subject',
       'Contact',
@@ -38,18 +38,23 @@ class TicketTable extends StatelessWidget {
         for (final ticket in TicketModel.tickets)
           DataRow(
             cells: <DataCell>[
-              DataCell(SizedBox(
-                  width: 10,
-                  child: Text(
-                    '${TicketModel.tickets.indexOf(ticket)}',
-                    style: const TextStyle(color: Colors.grey),
-                  ))),
-              DataCell(SizedBox(
-                  width: 10,
-                  child: Text(
-                    ticket.id,
-                    style: const TextStyle(color: Colors.grey),
-                  ))),
+              DataCell(
+                SizedBox(
+                    width: 10,
+                    child: Text(
+                      '${TicketModel.tickets.indexOf(ticket)}',
+                      style: const TextStyle(color: Colors.grey),
+                    )),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditTicketPage(
+                              editTicket: ticket,
+                            )),
+                  );
+                },
+              ),
               DataCell(getPriority('${ticket.priority}')),
               DataCell(SizedBox(
                   width: 200,
@@ -62,7 +67,7 @@ class TicketTable extends StatelessWidget {
                   leading: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: const BoxDecoration(
-                      color: Colors.amber,
+                      color: Colors.green,
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ),

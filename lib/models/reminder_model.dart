@@ -1,5 +1,5 @@
 class ReminderModel {
-  final String id, title, description;
+  final String id, title, description, contactID;
   final int dueDate, createdAt;
   static List<ReminderModel> reminders = [];
 
@@ -9,6 +9,7 @@ class ReminderModel {
     required this.description,
     required this.dueDate,
     required this.createdAt,
+    required this.contactID,
   });
 
   factory ReminderModel.fromMap(Map<String, dynamic> map) {
@@ -18,6 +19,7 @@ class ReminderModel {
       description: map['description'],
       dueDate: map['dueDate'],
       createdAt: map['createdAt'],
+      contactID: map['contactID'],
     );
   }
 
@@ -28,6 +30,7 @@ class ReminderModel {
       'description': description,
       'dueDate': dueDate,
       'createdAt': createdAt,
+      'contactID': contactID,
     };
   }
 }

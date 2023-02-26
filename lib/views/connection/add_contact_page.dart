@@ -12,35 +12,35 @@ class AddContactPage extends StatefulWidget {
 class _AddContactPageState extends State<AddContactPage> {
   GlobalKey<FormState> formState = GlobalKey<FormState>();
 
-  final subjectController = TextEditingController();
-  final descriptionController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
   bool submit = false;
   @override
   void initState() {
     super.initState();
-    subjectController.addListener(() {
+    nameController.addListener(() {
       setState(() {
-        submit = subjectController.text.isNotEmpty;
+        submit = nameController.text.isNotEmpty;
       });
     });
-    descriptionController.addListener(() {
+    emailController.addListener(() {
       setState(() {
-        submit = subjectController.text.isNotEmpty;
+        submit = nameController.text.isNotEmpty;
       });
     });
   }
 
   @override
   void dispose() {
-    subjectController.dispose();
-    descriptionController.dispose();
+    nameController.dispose();
+    emailController.dispose();
     super.dispose();
   }
 
   submitData() {
     var formData = formState.currentState;
     setState(() {
-      submit = subjectController.text.isNotEmpty;
+      submit = nameController.text.isNotEmpty;
     });
   }
 
@@ -59,7 +59,7 @@ class _AddContactPageState extends State<AddContactPage> {
           ),
         ),
         title: const Text(
-          'Reminders/add Reminder',
+          'Contacts/add Contact',
           style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
@@ -71,8 +71,10 @@ class _AddContactPageState extends State<AddContactPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FormSection(width: width, name: 'Subject', lines: 1, inputController: subjectController),
-              FormSection(width: width, name: 'Description', lines: 5, inputController: descriptionController),
+              FormSection(width: width, name: 'salutation', lines: 1, inputController: emailController),
+              FormSection(width: width, name: 'name', lines: 1, inputController: nameController),
+              FormSection(width: width, name: 'email', lines: 1, inputController: emailController),
+              FormSection(width: width, name: 'Phone', lines: 1, inputController: emailController),
               ElevatedButton(
                 onPressed: submit ? () => submitData : null,
                 style: ElevatedButton.styleFrom(surfaceTintColor: const Color(0xff0000ff)),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_4/models/reminder_model.dart';
+
+import '../../models/contact_model.dart';
 
 class ReminderTable extends StatelessWidget {
   const ReminderTable({
@@ -9,12 +12,10 @@ class ReminderTable extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> headerTitles = [
       '#',
-      'ID',
       'Title',
       'Description',
       'Contact',
       'Remind At',
-
     ];
     return DataTable(
       columns: <DataColumn>[
@@ -23,43 +24,44 @@ class ReminderTable extends StatelessWidget {
             label: Expanded(
               child: Text(
                 title,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.grey),
               ),
             ),
           ),
       ],
       dataRowHeight: 80,
       rows: <DataRow>[
-        // for (int i = 0; i < 15; i++)
-        DataRow(
-          cells: <DataCell>[
-            const DataCell(Text('1')),
-            const DataCell(Text('2345')),
-            const DataCell(Text('someone\'s birthday')),
-            const DataCell(SizedBox(width: 200, child: Text('Happy life'))),
-            DataCell(
-              ListTile(
-                leading: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: const BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+        for (final remind in ReminderModel.reminders)
+          DataRow(
+            cells: <DataCell>[
+              DataCell(Text(
+                ReminderModel.reminders.indexOf(remind).toString(),
+                style: const TextStyle(color: Colors.grey),
+              )),
+              DataCell(Text(remind.title)),
+              DataCell(SizedBox(width: 200, child: Text(remind.description))),
+              DataCell(
+                ListTile(
+                  leading: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      ContactModel.getContactFromID(remind.contactID).name[0],
+                      style: const TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
-                  child: const Text(
-                    'M',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  ),
+                  title: Text(ContactModel.getContactFromID(remind.contactID).name),
+                  subtitle: Text(ContactModel.getContactFromID(remind.contactID).phone),
                 ),
-                title: const Text('Mohammed'),
-                subtitle: const Text('+966583927562'),
               ),
-            ),
-            const DataCell(Text('Tomorrow')),
-          
-          ],
-        ),
+              DataCell(Text('${remind.createdAt}')),
+            ],
+          ),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_4/models/reminder_model.dart';
 import 'package:flutter_project_4/views/general/add_pages/add_reminder_page.dart';
 
 import '../../components/reminder_components/reminder_table.dart';
@@ -29,8 +30,8 @@ class ReminderPage extends StatelessWidget {
           ),
           Column(
             children: [
-              const PageHead(
-                name: 'Reminders',
+              PageHead(
+                name: 'Reminders (${ReminderModel.reminders.length})',
               ),
               SizedBox(
                 height: 500,

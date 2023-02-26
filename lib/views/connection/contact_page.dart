@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_4/components/contact_table.dart';
+import 'package:flutter_project_4/models/contact_model.dart';
 import 'package:flutter_project_4/views/connection/add_contact_page.dart';
 
 import '../../components/ticket_list_components/page_head.dart';
@@ -28,14 +30,16 @@ class ContactPage extends StatelessWidget {
           ),
           Column(
             children: [
-              const PageHead(
-                name: 'Contact',
+              PageHead(
+                name: 'Contact (${ContactModel.contacts.length})',
               ),
               SizedBox(
                 height: 500,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  children: const [],
+                  children: const [
+                    ContactTable(),
+                  ],
                 ),
               ),
             ],

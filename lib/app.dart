@@ -69,7 +69,7 @@ class _AppState extends State<App> {
           title: 'Hello world',
           description: 'this is a test for hello world',
           dueDate: 1545654,
-          createdAt: 3245465));
+          createdAt: 3245465, contactID: '0'));
       setState(() {});
     });
   }

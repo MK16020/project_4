@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_4/models/ticket_model.dart';
 import 'package:flutter_project_4/views/general/add_pages/add_ticket_page.dart';
 
 import '../../components/ticket_list_components/page_head.dart';
@@ -34,8 +35,8 @@ class _TicketListPageState extends State<TicketListPage> {
           ),
           Column(
             children: [
-              const PageHead(
-                name: 'Ticket',
+              PageHead(
+                name: 'Ticket (${TicketModel.tickets.length.toString()})',
               ),
               SizedBox(
                 height: 500,
