@@ -118,7 +118,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          surfaceTintColor: (selected == i) ? Colors.blue : const Color(0xffE3E6E7),
+                          backgroundColor: (selected == i) ? Colors.blue : const Color(0xffE3E6E7),
                         ),
                         child: Row(
                           children: [
@@ -138,7 +138,9 @@ class _AddTicketPageState extends State<AddTicketPage> {
                 ElevatedButton(
                   onPressed: () {
                     var createdAt = DateFormat.yMMMEd().format(DateTime.now());
+                    var ticketID = TicketModel.tickets.length.toString();
                     TicketModel ticket = TicketModel(
+                      id: ticketID,
                       subject: subjectController.text.trim(),
                       description: descriptionController.text.trim(),
                       statusID: TicketStatusModel.statuses.first.id,
@@ -146,9 +148,9 @@ class _AddTicketPageState extends State<AddTicketPage> {
                       createdAt: createdAt,
                       contactID: contactsController.text.trim(),
                     );
-                    FirebaseFirestore.instance.collection('Ticket').add(ticket.toMap());
+                    FirebaseFirestore.instance.collection('Ticket').doc(ticketID).set(ticket.toMap());
                   },
-                  style: ElevatedButton.styleFrom(surfaceTintColor: const Color(0xff0000ff)),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff0000ff)),
                   child: const Text('Create'),
                 ),
               ],

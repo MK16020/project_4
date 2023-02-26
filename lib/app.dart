@@ -40,11 +40,11 @@ class _AppState extends State<App> {
       for (final doc in docs) {
         final data = doc.data();
         final ticketFromData = TicketModel.fromMap(data);
-        print(data);
         ticketList.add(ticketFromData);
       }
       TicketModel.tickets = ticketList;
       TicketModel.tickets.add(TicketModel(
+          id: '1',
           subject: 'Hello',
           description: "Hello world discretion ",
           statusID: '2',

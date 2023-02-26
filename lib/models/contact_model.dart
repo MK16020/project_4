@@ -1,9 +1,9 @@
 class ContactModel {
   final String id, name, email, imageUrl, phone, salutation;
 
-  static List<ContactModel> statuses = [
+  static List<ContactModel> contacts = [
     ContactModel(
-        id: '1',
+        id: '0',
         name: 'maryam',
         email: 'email@mail.com',
         imageUrl: 'assets/images/logo.png',
@@ -19,6 +19,17 @@ class ContactModel {
     required this.phone,
     required this.salutation,
   });
+
+  static ContactModel getContactFromID(String contactID) {
+    ContactModel contact = ContactModel(
+        id: 'o', name: 'Someone', email: 'Email@mail.com', imageUrl: 'pic', phone: '05000443356', salutation: 'Mr');
+    for (final status in contacts) {
+      if (status.id == contactID) {
+        contact = status;
+      }
+    }
+    return contact;
+  }
 
   factory ContactModel.fromMap(Map<String, dynamic> map) {
     return ContactModel(

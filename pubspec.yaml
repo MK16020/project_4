@@ -82,7 +82,7 @@ flutter:
   fonts:
     - family: RobotoCondensed
       fonts:
-        - asset: assets/fonts/RobotoCondensed-Regular.ttf
+        - asset: assets/fonts/RobotoCondensed-Bold.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

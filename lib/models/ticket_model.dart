@@ -1,9 +1,10 @@
 class TicketModel {
-  final String subject, description, statusID, createdAt, contactID;
+  final String id, subject, description, statusID, createdAt, contactID;
   String? priority, dueDate;
   static List<TicketModel> tickets = [];
 
   TicketModel({
+    required this.id,
     required this.subject,
     required this.description,
     required this.statusID,
@@ -14,6 +15,7 @@ class TicketModel {
   });
   factory TicketModel.fromMap(Map<String, dynamic> map) {
     return TicketModel(
+      id: map['id'],
       subject: map['subject'],
       description: map['description'],
       statusID: map['statusID'],
@@ -26,6 +28,7 @@ class TicketModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'subject': subject,
       'description': description,
       'statusID': statusID,
